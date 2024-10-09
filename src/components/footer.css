@@ -1,0 +1,19 @@
+.footerContent{
+    text-align: center;
+    align-items: center;
+    place-items: center;
+    background-color:#bf4800;
+    justify-content: center;
+    padding: 20px;
+    
+  }
+
+  .footerContent img{
+    width: 150px;
+    border-radius: 30%;
+    margin: auto;
+  }
+
+  .footerContent h2{
+    color: white;
+  }

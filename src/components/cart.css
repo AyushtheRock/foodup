@@ -1,0 +1,87 @@
+.CartDetail {
+    display: flex;
+    gap: 50px;
+    margin: 30px;
+    background-color:  rgb(102, 102, 102);
+    width: 100%;
+}
+
+.CartDetail .cartImage{
+    width: 10%;
+}
+
+.CartDetail .cartName{
+    width: 20%;
+}
+
+.CartDetail h3{
+    margin-top: 40px;
+}
+
+.CartDetail button{
+    margin-top: 40px;
+}
+
+.CartDetail span{
+    margin-top: 40px;
+}
+
+.CartDetail .CartButton{
+    display: flex;
+    gap: 10px;
+    margin-left: 50px;
+}
+.button1{
+    width: 20px;
+    height: 20px;
+    
+}
+
+.quantity{
+    display: flex;
+    gap: 5px;
+    
+}
+
+.quantity button{
+    padding: 0;
+    margin: 0;
+  
+}
+
+.cartbtn{
+    cursor: pointer;
+}
+
+.TotalCart{
+    font-size: 25px;
+    margin-left: 30px;
+}
+
+.slidepart{
+    background-color: rgb(102, 102, 102);
+    width: 60%;
+}
+
+.slide-container{
+    width: 90%;
+    height: 400px;
+    margin: auto;
+    align-items: left;
+}
+.header2{
+    display: flex;
+    width: 100%;
+}
+.header-image{
+    width: 50%;
+    height: 500px;
+    
+}
+
+.chefImage{
+    width: 600px;
+    height: 500px;
+    overflow: hidden;
+    
+}
