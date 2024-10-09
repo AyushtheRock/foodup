@@ -2,7 +2,12 @@ import React from 'react';
 import Card from './Card';
 import { useState , useEffect } from 'react';
 import Shimmer from './Shimmer';
+import Cart from './Cart';
+import Header from './Header';
+import Slideshow from './Slideshow';
 import Footer from './Footer';
+
+
 
 
 const resList= [{
@@ -1651,56 +1656,98 @@ function Home() {
       
       const[searchText,setsearchText] = useState("");
 
-     useEffect(()=> {
-      fetchData();
-     },[]);
+      const[cart,setCart] = useState([]);
+
+      const[showCart,setShowCart]=useState(false);
+    
 
      const fetchData = async () => {
-      const data = await fetch("");
-      const json = await data.json();
+      const response = await fetch('https://dummyjson.com/recipes');
+      const data = await response.json();
+      console.log(data);
       
-      setlistofRes(json?.data?.success?.cards[4]?.gridWidget?.gridElements?.infoWithStyle?.restaurants);
-      setfilteredRestaurant(json?.data?.success?.cards[4]?.gridWidget?.gridElements?.infoWithStyle?.restaurants);
+      setlistofRes(data.recipes);
+      setfilteredRestaurant(data.recipes);
      };
 
  if(listofRes.length === 0){
       return <Shimmer />
  }
 
+ useEffect(()=> {
+      fetchData();
+     },[]);
+
+
+     const AddtoCart = (data) => {
+       setCart([...cart,{ ...data, quantity:1}])
+       
+     }
+
+
+
 
   return (
+      <div>
+            <Header count={cart.length} setShowCart={(value) => setShowCart(value)} />
+               
     <div className='myhome'>
      <div className='filter'>
       <button className='btn-top' onClick={()=>{
             const filteredList = listofRes.filter(
-                  (resData) => resData.info.avgRating > 4 
+                  (resData) => resData.rating > 4.7 
             );
             setfilteredRestaurant(filteredList);
       }}
       >Top Restaurents</button>
       </div>
-       <div className='search'>
-        <input type='text' className='search-box' value={searchText} 
-        onChange={(e) =>{
-         setsearchText(e.target.value);
-        }}></input>
-        <button onClick={()=>{
-            console.log(searchText);
+       {
+            showCart?null:<div className='search'>
+            <input type='text' className='search-box' value={searchText} 
+            onChange={(e) =>{
+             setsearchText(e.target.value);
+            }}></input>
+            <button onClick={()=>{
+    
+                const filteredList = listofRes.filter(
+                      (res) => res.name.includes(searchText)
+                );
+            setfilteredRestaurant(filteredList);
+            }} className='sbutton'>Search</button>
+          </div>
+       }
+       {
 
-            const filteredList = listofRes.filter(
-                  (res) => res.info.name.includes(searchText)
-            );
-        setfilteredRestaurant(filteredList);
-        }} className='sbutton'>Search</button>
-      </div>
-      <div className='home1'> 
+
+     showCart? null :
+       <div className="header2">
+       <div className="slidepart">
+         <Slideshow />  
+       </div> 
+       <div className="header-image">
+            <img className="chefImage" src="https://thumbs.dreamstime.com/b/d-cartoon-cook-character-funny-merry-icon-isolated-no-background-gourmet-chef-man-cooking-figure-61414518.jpg"></img>
+       </div>
+       
+       </div>
+       }
+      {
+            showCart?  <Cart cart={cart} /> :   <div className='home1'> 
+            
+     
   {filteredRestaurant.map((restaurant) => (
-    <Card  item key={restaurant.id} resData={restaurant} />
+    <Card  item key={restaurant.id} resData={restaurant} AddtoCart={AddtoCart}  />
+    
+    
    ))}
+   
    </div>
-   <div>
-     <Footer />
+      }
+      {
+          showCart? null:   <Footer />
+      }
+    
    </div>
+  
    </div>
    )
   
