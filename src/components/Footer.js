@@ -1,9 +1,11 @@
-import React from 'react';
 
 function Footer() {
   return (
-    <div className='footer'>
-      <h3>Copyright @ 2023 Ayush</h3>
+    <div  className="footerContent">
+      <div>
+      <img src="https://img.freepik.com/premium-vector/cute-chef-boy-pan-cartoon-illustration_426162-279.jpg"></img>
+      <h2>You have reached the bottom of page</h2>
+      </div>
     </div>
   )
 }
